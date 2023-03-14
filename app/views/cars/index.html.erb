@@ -1,13 +1,32 @@
 <h1>Cars#index</h1>
-<p>Find me in app/views/cars/index.html.erb</p>
 
-<% @cars.each do |car| %>
-  <div>
-    <h2><%= link_to car.make_and_model, car_path(car) %></h2>
-    <p>Year: <%= car.year %></p>
-    <p>Price: <%= car.price %></p>
-    <p>Available from: <%= car.available_from.strftime("%B %d, %Y") %></p>
-    <p>Available to: <%= car.available_to.strftime("%B %d, %Y") %></p>
-    <p><%= link_to "Book now", new_car_booking_path(car) %></p>
-  </div>
-<% end %>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Fuel</th>
+      <th>Make</th>
+      <th>Seats</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cars.each do |car| %>
+      <tr>
+        <td><%= car.name %></td>
+        <td><%= car.fuel %></td>
+        <td><%= car.make %></td>
+        <td><%= car.seats %></td>
+        <td>
+          <%= link_to 'View', car_path(car) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Car', new_car_path %>
+
+
+<p>Find me in app/views/cars/index.html.erb</p>

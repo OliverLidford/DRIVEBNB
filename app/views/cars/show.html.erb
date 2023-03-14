@@ -7,10 +7,10 @@
 
 <% if current_user && current_user == @car.user %>
   <%= link_to 'Edit', edit_car_path(@car) %>
+  <%= link_to 'Delete', car_path(@car), method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
 
 <%= link_to 'Back', cars_path %>
-
 
 
 <p>Find me in app/views/cars/show.html.erb</p>
