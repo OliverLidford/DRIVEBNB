@@ -1,2 +1,14 @@
 <h1>Bookings#new</h1>
+
+
+
+<%= simple_form_for [@car, @booking] do |f| %>
+  <%= f.input :date_from, as: :string, input_html: { type: :date } %>
+  <%= f.input :date_to, as: :string, input_html: { type: :date } %>
+  <%= f.button :submit %>
+<% end %>
+
+<%= link_to "Cancel", car_path(@car) %>
+
+
 <p>Find me in app/views/bookings/new.html.erb</p>

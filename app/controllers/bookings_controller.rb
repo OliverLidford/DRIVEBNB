@@ -10,7 +10,7 @@ class BookingsController < ApplicationController
   end
 
   def new
-    @booking = Booking.new
+    @booking = @car.bookings.new
   end
 
   def create
@@ -19,7 +19,7 @@ class BookingsController < ApplicationController
     @booking.car = @car
 
     if @booking.save
-      redirect_to booking_path(@booking)
+      redirect_to car_path(@car), notice: "Booking created successfully."
     else
       render :new
     end
