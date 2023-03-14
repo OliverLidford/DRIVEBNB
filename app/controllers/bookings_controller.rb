@@ -2,7 +2,8 @@ class BookingsController < ApplicationController
   before_action :set_car, only: [:new, :create, :update, :show]
 
   def index
-    @bookings = current_user.bookings
+    @user_bookings = current_user.bookings
+    @owner_bookings = current_user.cars.map(&:bookings).flatten
   end
 
   def show
@@ -38,7 +39,7 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:date_from, :date_to)
+    params.require(:booking).permit(:status, :date_from, :date_to)
   end
 
   def set_car

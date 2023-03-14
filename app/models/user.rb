@@ -5,5 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :cars
   has_many :feedbacks
-  has_many :bookingsw
+  has_many :bookings
 end
