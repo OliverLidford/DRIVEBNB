@@ -1,6 +1,16 @@
 <h1>Cars#show</h1>
+
+<h1><%= @car.name %></h1>
+<p>Fuel: <%= @car.fuel %></p>
+<p>Make: <%= @car.make %></p>
+<p>Seats: <%= @car.seats %></p>
+
+<% if current_user && current_user == @car.user %>
+  <%= link_to 'Edit', edit_car_path(@car) %>
+<% end %>
+
+<%= link_to 'Back', cars_path %>
+
+
+
 <p>Find me in app/views/cars/show.html.erb</p>
-
-<h1><%= @car.make_and_model %></h1>
-
-<p><%= @car.description %></p>
