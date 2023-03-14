@@ -11,7 +11,12 @@
   <h2>Bookings for cars I own:</h2>
   <ul>
     <% @owner_bookings.each do |booking| %>
-      <li><%= booking.car.name %> - <%= booking.status %></li>
+      <li><%= booking.car.name %> - <%= booking.status %> -
+        <% if current_user == booking.car.user && booking.status == "pending" %>
+      <%= link_to 'Accept', accept_car_booking_path(booking.car, booking), method: :patch %>
+      <%= link_to 'Decline', decline_car_booking_path(booking.car, booking), method: :patch %>
+        <% end %>
+      </li>
     <% end %>
   </ul>
 <% end %>
