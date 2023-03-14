@@ -1,2 +1,15 @@
-<h1>Cars#edit</h1>
+<!-- app/views/cars/edit.html.erb -->
+
+<h1>Edit Car</h1>
+
+<%= simple_form_for @car do |f| %>
+  <%= f.input :name %>
+  <%= f.input :fuel %>
+  <%= f.input :make %>
+  <%= f.input :seats %>
+  <%= f.button :submit %>
+<% end %>
+
+<%= link_to "Cancel", car_path(@car) %>
+
 <p>Find me in app/views/cars/edit.html.erb</p>
