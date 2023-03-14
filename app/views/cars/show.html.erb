@@ -5,12 +5,49 @@
 <p>Make: <%= @car.make %></p>
 <p>Seats: <%= @car.seats %></p>
 
+<!-- Link to create new booking -->
+<% if user_signed_in? %>
+  <%= link_to 'Book Now', new_car_booking_path(@car) %>
+<% end %>
+
+<br>
+
 <% if current_user && current_user == @car.user %>
   <%= link_to 'Edit', edit_car_path(@car) %>
   <%= link_to 'Delete', car_path(@car), method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
 
+<h2>Bookings</h2>
+
+<% if @car.bookings.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Date from</th>
+        <th>Date to</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @car.bookings.each do |booking| %>
+        <tr>
+          <td><%= booking.user.email %></td>
+          <td><%= booking.date_from %></td>
+          <td><%= booking.date_to %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No bookings found.</p>
+<% end %>
+
+
+
+
 <%= link_to 'Back', cars_path %>
+
+
 
 
 <p>Find me in app/views/cars/show.html.erb</p>
