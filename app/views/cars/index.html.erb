@@ -1,0 +1,32 @@
+<h1>Cars#index</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Fuel</th>
+      <th>Make</th>
+      <th>Seats</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cars.each do |car| %>
+      <tr>
+        <td><%= car.name %></td>
+        <td><%= car.fuel %></td>
+        <td><%= car.make %></td>
+        <td><%= car.seats %></td>
+        <td>
+          <%= link_to 'View', car_path(car) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Car', new_car_path %>
+
+
+<p>Find me in app/views/cars/index.html.erb</p>
