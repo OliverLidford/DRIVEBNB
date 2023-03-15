@@ -8,6 +8,7 @@ class FeedbacksController < ApplicationController
   def create
     @feedback = Feedback.new(feedback_params)
     @feedback.user = current_user
+    @feedback.car = @booking.car
     @feedback.booking = @booking
 
     if @feedback.save
