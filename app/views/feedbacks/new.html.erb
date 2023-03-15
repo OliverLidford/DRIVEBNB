@@ -1,2 +1,13 @@
 <h1>Feedbacks#new</h1>
+
+<h1>Leave Feedback</h1>
+
+<%= simple_form_for [@booking, @feedback] do |f| %>
+  <%= f.input :rating, label: "Rating", collection: 1..5, prompt: "Select a rating" %>
+  <%= f.input :content, label: "Feedback" %>
+  <%= f.button :submit, "Submit Feedback" %>
+<% end %>
+
+<%= link_to 'Back', bookings_path %>
+
 <p>Find me in app/views/feedbacks/new.html.erb</p>

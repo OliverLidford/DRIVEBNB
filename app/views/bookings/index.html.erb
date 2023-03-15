@@ -7,6 +7,19 @@
   <% end %>
 </ul>
 
+<% @user_bookings.each do |booking| %>
+  <li>
+    <%= booking.car.name %> - <%= booking.status %>
+    <% if booking.status == "accepted" %>
+     <% if current_user.feedbacks.find_by(booking_id: booking.id) %>
+        <%= link_to 'Feedback left', '#' %>
+      <% else %>
+      <%= link_to 'Leave Feedback', new_booking_feedback_path(booking) %>
+      <% end %>
+    <% end %>
+  </li>
+<% end %>
+
 <% if current_user.cars.any? %>
   <h2>Bookings for cars I own:</h2>
   <ul>

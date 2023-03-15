@@ -4,6 +4,7 @@ class BookingsController < ApplicationController
   def index
     @user_bookings = current_user.bookings
     @owner_bookings = current_user.cars.map(&:bookings).flatten
+    @feedbacked_bookings = Feedback.where(user_id: current_user.id).pluck(:booking_id)
   end
 
   def show
