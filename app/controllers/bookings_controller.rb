@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_car, only: [:new, :create, :update, :show]
+  before_action :set_car, only: [:new, :create, :update, :show, :accept, :decline]
 
   def index
     @user_bookings = current_user.bookings
@@ -36,6 +36,20 @@ class BookingsController < ApplicationController
     end
   end
 
+  def accept
+    @booking = Booking.find(params[:id])
+    @booking.update(status: 'accepted')
+    @booking.save
+    redirect_to bookings_path
+  end
+
+  def decline
+    @booking = Booking.find(params[:id])
+    @booking.update(status: 'declined')
+    @booking.save
+    redirect_to bookings_path
+  end
+
   private
 
   def booking_params
@@ -43,6 +57,11 @@ class BookingsController < ApplicationController
   end
 
   def set_car
-    @car = Car.find(params[:car_id])
+    @car =
+      if params[:action] == 'new' || params[:action] == 'create'
+        Car.find(params[:car_id])
+      else
+        Booking.find(params[:id]).car
+      end
   end
 end

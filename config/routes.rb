@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   resources :bookings, only: [:index, :update, :show] do
     resources :feedbacks, only: [:new, :create]
   end
+
+  patch 'cars/:car_id/bookings/:id/accept', to: 'bookings#accept', as: :accept_car_booking
+  patch 'cars/:car_id/bookings/:id/decline', to: 'bookings#decline', as: :decline_car_booking
 end
