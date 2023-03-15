@@ -16,7 +16,7 @@ class CarsController < ApplicationController
     @car.user = current_user
 
     if @car.save
-      redirect_to car_path(@car)
+      redirect_to car_path(@car), notice: "🎉 Your car has been born! 🚗💨 It's a beautiful bouncing baby car! 🤩👶🏼"
     else
       render :new
     end

@@ -11,6 +11,129 @@
 @import "components/index";
 @import "pages/index";
 
+// Bootstrap variables
+@import 'bootstrap/scss/variables';
+
+// Colors
+$primary: #f73c2c;
+$secondary: #ff5a5f;
+$success: #47b881;
+$info: #17a2b8;
+$warning: #ffc107;
+$danger: #dc3545;
+$light: #f8f9fa;
+$dark: #343a40;
+
+// Fonts
+$font-family-base: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+// Navbar
+.navbar {
+  background-color: $white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  .navbar-brand {
+    color: $primary;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    &:hover {
+      color: $primary;
+    }
+  }
+  .nav-link {
+    color: $dark;
+    text-transform: uppercase;
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+// Buttons
+.btn-primary {
+  background-color: $primary;
+  border-color: $primary;
+  &:hover, &:focus {
+    background-color: $secondary;
+    border-color: $secondary;
+  }
+}
+
+.btn-secondary {
+  background-color: $secondary;
+  border-color: $secondary;
+  &:hover, &:focus {
+    background-color: $primary;
+    border-color: $primary;
+  }
+}
+
+.btn-success {
+  background-color: $success;
+  border-color: $success;
+  &:hover, &:focus {
+    background-color: darken($success, 10%);
+    border-color: darken($success, 10%);
+  }
+}
+
+.btn-info {
+  background-color: $info;
+  border-color: $info;
+  &:hover, &:focus {
+    background-color: darken($info, 10%);
+    border-color: darken($info, 10%);
+  }
+}
+
+.btn-warning {
+  background-color: $warning;
+  border-color: $warning;
+  &:hover, &:focus {
+    background-color: darken($warning, 10%);
+    border-color: darken($warning, 10%);
+  }
+}
+
+.btn-danger {
+  background-color: $danger;
+  border-color: $danger;
+  &:hover, &:focus {
+    background-color: darken($danger, 10%);
+    border-color: darken($danger, 10%);
+  }
+}
+
+// Forms
+.form-control {
+  background-color: $light;
+  border-color: $dark;
+  color: $dark;
+  &:focus {
+    background-color: $white;
+    border-color: $primary;
+    box-shadow: none;
+    color: $dark;
+  }
+  &::placeholder {
+    color: $dark;
+    opacity: 0.5;
+  }
+}
+
+// Cards
+.card {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  &:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    transform: translateY(-2px);
+  }
+  .card-img-top {
+    border-radius: 4px 4px 0
+  }
+}
+
 .btn-link {
   background: none;
   border: none;
