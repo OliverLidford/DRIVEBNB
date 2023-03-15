@@ -1,11 +1,6 @@
 <h1>Bookings#index</h1>
 
 <h2>Bookings I've made:</h2>
-<ul>
-  <% @user_bookings.each do |booking| %>
-    <li><%= booking.car.name %> - <%= booking.status %></li>
-  <% end %>
-</ul>
 
 <% @user_bookings.each do |booking| %>
   <li>
@@ -38,5 +33,8 @@
     <% end %>
   </ul>
 <% end %>
+
+
+
 
 <p>Find me in app/views/bookings/index.html.erb</p>
