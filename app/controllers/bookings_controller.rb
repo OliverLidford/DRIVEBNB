@@ -21,7 +21,7 @@ class BookingsController < ApplicationController
     @booking.car = @car
 
     if @booking.save
-      redirect_to car_path(@car), notice: "Booking created successfully."
+      redirect_to car_path(@car), notice: "Your booking has been blessed by the travel gods 🙏✨. Bon voyage! 🚗💨"
     else
       render :new
     end

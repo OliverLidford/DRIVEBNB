@@ -1,17 +1,29 @@
-<h1>Pages#home</h1>
+<div class="container my-5">
+  <div class="row">
+    <div class="col-12 col-md-8 mx-auto text-center">
+      <h1>Welcome to CARBNB</h1>
+      <p class="lead">Discover the best cars for your trip.</p>
+    </div>
+  </div>
 
-<h1>Welcome to DRIVEBNB</h1>
-<p>Discover the best cars for your trip.</p>
-
-
-<nav>
-  <ul>
-    <li><%= link_to "Cars", cars_path %></li>
-    <li><%= link_to "Bookings", bookings_path %></li>
-    <li><%= link_to "Sign In", new_user_session_path%></li>
-  </ul>
-</nav>
-
+  <div class="row mt-5">
+    <div class="col-12 col-md-6 mx-auto">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <%= link_to "Cars", cars_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Bookings", bookings_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
 
 
 <p>Find me in app/views/pages/home.html.erb</p>
