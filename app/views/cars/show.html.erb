@@ -14,8 +14,11 @@
 
 <% if current_user && current_user == @car.user %>
   <%= link_to 'Edit', edit_car_path(@car) %>
-  <%= link_to 'Delete', car_path(@car), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%= form_with url: car_path(@car), method: :delete, local: true do %>
+  <%= button_tag 'Delete', type: 'submit', class: 'btn btn-link', data: { confirm: 'Are you sure?' } %>
 <% end %>
+<% end %>
+
 
 <h2>Bookings</h2>
 

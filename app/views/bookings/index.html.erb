@@ -13,8 +13,13 @@
     <% @owner_bookings.each do |booking| %>
       <li><%= booking.car.name %> - <%= booking.status %> -
         <% if current_user == booking.car.user && booking.status == "pending" %>
-      <%= link_to 'Accept', accept_car_booking_path(booking.car, booking), method: :patch %>
-      <%= link_to 'Decline', decline_car_booking_path(booking.car, booking), method: :patch %>
+      <%= form_with url: accept_car_booking_path(booking.car, booking), method: :patch, local: true do %>
+  <%= submit_tag 'Accept' %>
+<% end %>
+
+<%= form_with url: decline_car_booking_path(booking.car, booking), method: :patch, local: true do %>
+  <%= submit_tag 'Decline' %>
+<% end %>
         <% end %>
       </li>
     <% end %>
