@@ -7,12 +7,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   # Cars routes
   resources :cars do
-    resources :bookings, only: [:new, :create] do
-      # member do
-      #   patch :accept
-      #   patch :decline
-      # end
-    end
+    resources :bookings, only: [:new, :create]
   end
   resources :bookings, only: [:index, :update, :show] do
     resources :feedbacks, only: [:new, :create]
