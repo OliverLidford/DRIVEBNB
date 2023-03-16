@@ -1,40 +1,51 @@
-<h1>Bookings#index</h1>
+<div class="row">
+  <div class="col-md-6">
+    <h2>Bookings I've made:</h2>
 
-<h2>Bookings I've made:</h2>
+    <% @user_bookings.each do |booking| %>
+      <div class="card mb-4">
+        <%= image_tag(booking.car.image_url, class: "card-img-top", alt: "#{booking.car.name} image") if booking.car.image_url.present? %>
+        <div class="card-body">
+          <h5 class="card-title"><%= booking.car.name %></h5>
+          <p class="card-text"><strong>Status:</strong> <%= booking.status %></p>
+          <p class="card-text"><strong>Booking dates:</strong> <%= booking.date_from.strftime("%B %d, %Y") %> - <%= booking.date_to.strftime("%B %d, %Y") %></p>
+          <% if booking.status == "accepted" %>
+            <% if current_user.feedbacks.find_by(booking_id: booking.id) %>
+              <%= link_to 'Feedback left', '#' %>
+            <% else %>
+              <%= link_to 'Leave Feedback', new_booking_feedback_path(booking) %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
-<% @user_bookings.each do |booking| %>
-  <li>
-    <%= booking.car.name %> - <%= booking.status %>
-    <% if booking.status == "accepted" %>
-     <% if current_user.feedbacks.find_by(booking_id: booking.id) %>
-        <%= link_to 'Feedback left', '#' %>
-      <% else %>
-      <%= link_to 'Leave Feedback', new_booking_feedback_path(booking) %>
+  <% if current_user.cars.any? %>
+    <div class="col-md-6">
+      <h2>Bookings for cars I own:</h2>
+
+      <% @owner_bookings.each do |booking| %>
+        <div class="card mb-4">
+          <%= image_tag(booking.car.image_url, class: "card-img-top", alt: "#{booking.car.name} image") if booking.car.image_url.present? %>
+          <div class="card-body">
+            <h5 class="card-title"><%= booking.car.name %></h5>
+            <p class="card-text"><strong>Status:</strong> <%= booking.status %></p>
+            <p class="card-text"><strong>Booking dates:</strong> <%= booking.date_from.strftime("%B %d, %Y") %> - <%= booking.date_to.strftime("%B %d, %Y") %></p>
+          </div>
+          <div class="card-footer d-flex justify-content-end">
+            <% if current_user == booking.car.user && booking.status == "pending" %>
+              <%= form_with url: accept_car_booking_path(booking.car, booking), method: :patch, local: true, class: "mr-2" do %>
+                <%= submit_tag 'Accept', class: "btn btn-success" %>
+              <% end %>
+
+              <%= form_with url: decline_car_booking_path(booking.car, booking), method: :patch, local: true do %>
+                <%= submit_tag 'Decline', class: "btn btn-danger" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
       <% end %>
-    <% end %>
-  </li>
-<% end %>
-
-<% if current_user.cars.any? %>
-  <h2>Bookings for cars I own:</h2>
-  <ul>
-    <% @owner_bookings.each do |booking| %>
-      <li><%= booking.car.name %> - <%= booking.status %> -
-        <% if current_user == booking.car.user && booking.status == "pending" %>
-      <%= form_with url: accept_car_booking_path(booking.car, booking), method: :patch, local: true do %>
-  <%= submit_tag 'Accept' %>
-<% end %>
-
-<%= form_with url: decline_car_booking_path(booking.car, booking), method: :patch, local: true do %>
-  <%= submit_tag 'Decline' %>
-<% end %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-
-
-
-
-<p>Find me in app/views/bookings/index.html.erb</p>
+    </div>
+  <% end %>
+</div>
