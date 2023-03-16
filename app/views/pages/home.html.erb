@@ -1,29 +1,81 @@
-<div class="container my-5">
-  <div class="row">
-    <div class="col-12 col-md-8 mx-auto text-center">
-      <h1>Welcome to CARBNB</h1>
-      <p class="lead">Discover the best cars for your trip.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .card {
+      position: relative;
+      border: none;
+    }
+
+    .card-img-top {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 10px;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    .card:hover .card-body {
+      opacity: 1;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-text {
+      font-size: 1.2rem;
+    }
+
+    .card-deck .card {
+      margin-right: 15px;
+      margin-left: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-12 col-md-8 mx-auto text-center">
+        <h1>Welcome to DRIVEBNB</h1>
+        <p class="lead">Discover the best famous cars for your trip.</p>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="card col-md mb-4">
+        <%= link_to cars_path do %>
+          <%= image_tag "https://ichef.bbci.co.uk/news/624/mcs/media/images/79082000/jpg/_79082779_79082773.jpg", class: "card-img-top img-fluid", alt: "Cars" %>
+          <div class="card-body">
+            <h2 class="card-title">Cars</h2>
+            <p class="card-text">View our selection of available cars.</p>
+          </div>
+        <% end %>
+      </div>
+      <div class="card col-md mb-4">
+        <%= link_to bookings_path do %>
+          <%= image_tag "https://4.bp.blogspot.com/_RYzP5x5En8A/TKqJbTqapeI/AAAAAAAAAEg/C9b8nM5F8D8/s1600/david-hasselhoff.jpg", class: "card-img-top img-fluid", alt: "Bookings", id: "bookings-image" %>
+          <div class="card-body">
+            <h2 class="card-title">Bookings</h2>
+            <p class="card-text">View and manage your bookings.</p>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
-
-  <div class="row mt-5">
-    <div class="col-12 col-md-6 mx-auto">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item">
-            <%= link_to "Cars", cars_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Bookings", bookings_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-</div>
-
-
-<p>Find me in app/views/pages/home.html.erb</p>
+</body>
+</html>
