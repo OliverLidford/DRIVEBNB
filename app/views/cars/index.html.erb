@@ -1,33 +1,28 @@
+<%# <style>
+.card {
+  width: 25rem; /* adjust the width to your liking */
+}
+</style> %>
+
 <h1>Cars#index</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Fuel</th>
-      <th>Make</th>
-      <th>Seats</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @cars.each do |car| %>
-      <tr>
-        <td><%= car.name %></td>
-        <td><%= car.fuel %></td>
-        <td><%= car.make %></td>
-        <td><%= car.seats %></td>
-        <td>
-          <%= link_to 'View', car_path(car) %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="row row-cols-1 row-cols-md-4 g-4">
+  <% @cars.each do |car| %>
+    <div class="col">
+      <div class="card h-100">
+     <%= image_tag(car.image_url, crop: :fill, width: 400, height: 300, gravity: :center, class: "card-img-top") if car.image_url.present? %>
+        <div class="card-body">
+          <h5 class="card-title"><%= car.name %></h5>
+          <p class="card-text"><strong>Fuel:</strong> <%= car.fuel %></p>
+          <p class="card-text"><strong>Make:</strong> <%= car.make %></p>
+          <p class="card-text"><strong>Seats:</strong> <%= car.seats %></p>
+          <%= link_to 'View', car_path(car), class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 
 <%= link_to 'New Car', new_car_path %>
-
-
 
 <p>Find me in app/views/cars/index.html.erb</p>
