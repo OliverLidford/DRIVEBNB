@@ -4,6 +4,7 @@
 <p>Fuel: <%= @car.fuel %></p>
 <p>Make: <%= @car.make %></p>
 <p>Seats: <%= @car.seats %></p>
+<%= image_tag(@car.image_url, :crop => :fill, :width => 400, :height => 300, :gravity => :center) %>
 
 <!-- Link to create new booking -->
 <% if user_signed_in? %>
