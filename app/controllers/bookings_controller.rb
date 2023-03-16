@@ -1,5 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_car, only: [:new, :create, :update, :show, :accept, :decline]
+  before_action :authenticate_user!
 
   def index
     @user_bookings = current_user.bookings
