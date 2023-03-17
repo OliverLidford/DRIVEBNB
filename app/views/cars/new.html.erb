@@ -1,4 +1,4 @@
-<h1>Cars#new</h1>
+<h1>Add a Car:</h1>
 
 <%= simple_form_for @car do |f| %>
   <%= f.input :name %>
@@ -6,8 +6,10 @@
   <%= f.input :make %>
   <%= f.input :seats %>
   <%= f.file_field :photo %>
-  <%= f.button :submit %>
+  <br>
+  <br>
+  <%= f.button :submit, class: 'btn btn-primary' %>
+  <br>
+  <br>
+  <%= link_to 'Cancel', cars_path, class: 'btn btn-outline-danger' %>
 <% end %>
-
-
-<p>Find me in app/views/cars/new.html.erb</p>
