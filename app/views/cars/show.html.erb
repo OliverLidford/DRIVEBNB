@@ -41,7 +41,7 @@
 <body>
 
 <div class="container mt-4">
-  <h1><%= @car.name %></h1>
+  <h1 style="color: #f73c2c;"><%= @car.name %></h1>
   <div class="card">
     <% if @car.image_url.present? %>
       <%= image_tag(@car.image_url, :crop => :fill, :width => 600, :height => 200, :gravity => :center) %>
