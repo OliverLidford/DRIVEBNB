@@ -7,6 +7,17 @@
   <style>
     .card {
       width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .card img {
+      height: 200px;
+      width: 600px;
+      object-fit: cover;
+      margin-right: 30px;
     }
 
     .buttons {
@@ -17,16 +28,12 @@
       margin-top: 30px;
     }
 
-    h1, h2, img {
+    h1, h2 {
       margin-top: 30px;
     }
 
     h2 {
       margin-top: 50px;
-    }
-
-    .car-image {
-      margin-bottom: 500px;
     }
   </style>
 
@@ -35,25 +42,27 @@
 
 <div class="container mt-4">
   <h1><%= @car.name %></h1>
-  <table class="table">
-    <tbody>
-      <tr>
-        <td>Fuel:</td>
-        <td><%= @car.fuel %></td>
-      </tr>
-      <tr>
-        <td>Make:</td>
-        <td><%= @car.make %></td>
-      </tr>
-      <tr>
-        <td>Seats:</td>
-        <td><%= @car.seats %></td>
-      </tr>
-    </tbody>
-  </table>
-  <% if @car.image_url.present? %>
-    <%= image_tag(@car.image_url, :crop => :fill, :width => 400, :height => 300, :gravity => :center) %>
-  <% end %>
+  <div class="card">
+    <% if @car.image_url.present? %>
+      <%= image_tag(@car.image_url, :crop => :fill, :width => 600, :height => 200, :gravity => :center) %>
+    <% end %>
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>Fuel:</td>
+          <td><%= @car.fuel %></td>
+        </tr>
+        <tr>
+          <td>Make:</td>
+          <td><%= @car.make %></td>
+        </tr>
+        <tr>
+          <td>Seats:</td>
+          <td><%= @car.seats %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <!-- Link to create new booking -->
   <% if user_signed_in? %>
@@ -69,53 +78,64 @@
     </div>
   <% end %>
 
-  <% if @car.bookings.any? %>
-    <h2>Bookings</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>User</th>
-          <th>Date from</th>
-          <th>Date to</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @car.bookings.each do |booking| %>
+<div class="card mt-4">
+  <div class="card-body">
+    <% if @car.bookings.any? %>
+      <h2>Bookings</h2>
+      <table class="table">
+        <thead>
           <tr>
-            <td><%= booking.user.email %></td>
-            <td><%= booking.date_from %></td>
-            <td><%= booking.date_to %></td>
+            <th>User</th>
+            <th>Date from</th>
+            <th>Date to</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% else %>
-    <p>No bookings found.</p>
-  <% end %>
-
-  <% if @car.feedbacks.any? %>
-    <h2>Feedbacks</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>User</th>
-          <th>Rating</th>
-          <th>Content</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @car.feedbacks.each do |feedback| %>
-          <tr>
-            <td><%= feedback.user.email %></td>
-            <td><%= feedback.rating %></td>
-            <td><%= feedback.content %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% else %>
-    <p>No feedbacks found.</p>
-  <% end %>
-
-  <%= link_to 'Back', cars_path, class: 'btn btn-outline-primary' %>
+        </thead>
+        <tbody>
+          <% @car.bookings.each do |booking| %>
+            <tr>
+              <td><%= booking.user.email %></td>
+              <td><%= booking.date_from %></td>
+              <td><%= booking.date_to %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No bookings found.</p>
+    <% end %>
+  </div>
 </div>
+
+<% if @car.feedbacks.any? %>
+<div class="card mt-4">
+<div class="card-body">
+<h2 class="card-title">Feedbacks</h2>
+<table class="table">
+<thead>
+<tr>
+<th>User</th>
+<th>Rating</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<% @car.feedbacks.each do |feedback| %>
+<tr>
+<td><%= feedback.user.email %></td>
+<td><%= feedback.rating %></td>
+<td><%= feedback.content %></td>
+</tr>
+<% end %>
+</tbody>
+</table>
+</div>
+</div>
+<% else %>
+<p>No feedbacks found.</p>
+<% end %>
+
+<%= link_to 'Back', cars_path, class: 'btn btn-outline-primary' %>
+
+</div>
+</body>
+</html>
