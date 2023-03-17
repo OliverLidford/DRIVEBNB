@@ -3,14 +3,16 @@
 <div class="row">
   <% @cars.each do |car| %>
     <div class="col-md-6 mb-4">
-      <div class="card h-55">
-        <%= image_tag(car.image_url, crop: :fill, width: 800, height: 600, gravity: :center, class: "card-img-top") if car.image_url.present? %>
-        <div class="card-body">
-          <h5 class="card-title"><%= car.name %></h5>
-          <p class="card-text"><strong>Fuel:</strong> <%= car.fuel %></p>
-          <p class="card-text"><strong>Make:</strong> <%= car.make %></p>
-          <p class="card-text"><strong>Seats:</strong> <%= car.seats %></p>
-          <%= link_to 'View', car_path(car), class: "btn btn-primary" %>
+      <div class="card-product">
+        <%= link_to car_path(car) do %>
+          <%= image_tag(car.image_url, class: "card-product-img") if car.image_url.present? %>
+        <% end %>
+        <div class="card-product-infos">
+          <h2><%= car.name %></h2>
+          <p>Fuel: <%= car.fuel %></p>
+          <p>Make: <%= car.make %></p>
+          <p>Seats: <%= car.seats %></p>
+          <%= link_to 'View', car_path(car), class: 'btn btn-primary btn-sm' %>
         </div>
       </div>
     </div>
@@ -20,7 +22,36 @@
 <%= link_to 'New Car', new_car_path, class: 'btn btn-success' %>
 
 <style>
-.card {
-  width: 100%; /* adjust the width to your liking */
+.card-product {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.card-product-img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  margin-right: 12px;
+}
+
+.card-product h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-product p {
+  font-size: 20px;
+  margin: 0;
+}
+
+.card-product .card-product-infos {
+  flex-grow: 1;
+}
+
+.btn-primary.btn-sm {
+  font-size: 20px;
 }
 </style>

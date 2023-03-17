@@ -3,17 +3,17 @@
     <h2>Bookings I've made:</h2>
 
     <% @user_bookings.each do |booking| %>
-      <div class="card mb-4">
-        <%= image_tag(booking.car.image_url, class: "card-img-top", alt: "#{booking.car.name} image") if booking.car.image_url.present? %>
-        <div class="card-body">
-          <h5 class="card-title"><%= booking.car.name %></h5>
-          <p class="card-text"><strong>Status:</strong> <%= booking.status %></p>
-          <p class="card-text"><strong>Booking dates:</strong> <%= booking.date_from.strftime("%B %d, %Y") %> - <%= booking.date_to.strftime("%B %d, %Y") %></p>
+      <div class="card-product mb-4">
+        <%= image_tag(booking.car.image_url, class: "card-product-img") if booking.car.image_url.present? %>
+        <div class="card-product-infos">
+          <h2><%= booking.car.name %></h2>
+          <p>Status: <%= booking.status %></p>
+          <p>Booking dates: <%= booking.date_from.strftime("%B %d, %Y") %> - <%= booking.date_to.strftime("%B %d, %Y") %></p>
           <% if booking.status == "accepted" %>
             <% if current_user.feedbacks.find_by(booking_id: booking.id) %>
-              <%= link_to 'Feedback left', '#', class: 'btn btn-light'%>
+              <%= link_to 'Feedback left', '#', class: 'btn btn-light btn-sm'%>
             <% else %>
-              <%= link_to 'Leave Feedback', new_booking_feedback_path(booking), class: 'btn btn-primary'%>
+              <%= link_to 'Leave Feedback', new_booking_feedback_path(booking), class: 'btn btn-primary btn-sm'%>
             <% end %>
           <% end %>
         </div>
@@ -26,21 +26,21 @@
       <h2>Bookings for cars I own:</h2>
 
       <% @owner_bookings.each do |booking| %>
-        <div class="card mb-4">
-          <%= image_tag(booking.car.image_url, class: "card-img-top", alt: "#{booking.car.name} image") if booking.car.image_url.present? %>
-          <div class="card-body">
-            <h5 class="card-title"><%= booking.car.name %></h5>
-            <p class="card-text"><strong>Status:</strong> <%= booking.status %></p>
-            <p class="card-text"><strong>Booking dates:</strong> <%= booking.date_from.strftime("%B %d, %Y") %> - <%= booking.date_to.strftime("%B %d, %Y") %></p>
+        <div class="card-product mb-4">
+          <%= image_tag(booking.car.image_url, class: "card-product-img") if booking.car.image_url.present? %>
+          <div class="card-product-infos">
+            <h2><%= booking.car.name %></h2>
+            <p>Status: <%= booking.status %></p>
+            <p>Booking dates: <%= booking.date_from.strftime("%B %d, %Y") %> - <%= booking.date_to.strftime("%B %d, %Y") %></p>
           </div>
           <div class="card-footer d-flex justify-content-end">
             <% if current_user == booking.car.user && booking.status == "pending" %>
               <%= form_with url: accept_car_booking_path(booking.car, booking), method: :patch, local: true, class: "mr-2" do %>
-                <%= submit_tag 'Accept', class: "btn btn-success" %>
+                <%= submit_tag 'Accept', class: "btn btn-success btn-sm" %>
               <% end %>
 
               <%= form_with url: decline_car_booking_path(booking.car, booking), method: :patch, local: true do %>
-                <%= submit_tag 'Decline', class: "btn btn-danger" %>
+                <%= submit_tag 'Decline', class: "btn btn-danger btn-sm" %>
               <% end %>
             <% end %>
           </div>
@@ -49,3 +49,46 @@
     </div>
   <% end %>
 </div>
+
+<style>
+.card-product {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  /* padding: 12px;
+  margin-bottom: 16px; */
+}
+
+.card-product-img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  margin-right: 12px;
+}
+
+.card-product h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-product p {
+  font-size: 20px;
+  margin: 0;
+}
+
+.card-product .card-product-infos {
+  flex-grow: 1;
+}
+
+.btn-primary.btn-sm {
+  font-size
+}
+
+.card-footer {
+  margin-top: auto;
+}
+
+
+</style>
