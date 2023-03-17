@@ -15,7 +15,7 @@ class CarsController < ApplicationController
     @car = Car.new(car_params)
     @car.user = current_user
 
-    if @car.save
+    if @car.save!
       if @car.photo.attached?
         @car.update(image_url: url_for(@car.photo))
       end
