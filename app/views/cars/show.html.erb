@@ -1,82 +1,123 @@
-<h1>Cars#show</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cars#show</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<h1><%= @car.name %></h1>
-<p>Fuel: <%= @car.fuel %></p>
-<p>Make: <%= @car.make %></p>
-<p>Seats: <%= @car.seats %></p>
-<% if @car.image_url.present? %>
-  <%= image_tag(@car.image_url, :crop => :fill, :width => 400, :height => 300, :gravity => :center) %>
-<% end %>
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-<!-- Link to create new booking -->
-<% if user_signed_in? %>
-  <%= link_to 'Book Now', new_car_booking_path(@car) %>
-<% end %>
+  <style>
+    .card {
+      width: 100%;
+    }
 
-<br>
+    .buttons {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      margin-top: 30px;
+    }
 
-<% if current_user && current_user == @car.user %>
-  <%= link_to 'Edit', edit_car_path(@car) %>
-  <%= form_with url: car_path(@car), method: :delete, local: true do %>
-  <%= button_tag 'Delete', type: 'submit', class: 'btn btn-link', data: { confirm: 'Are you sure?' } %>
-<% end %>
-<% end %>
+    h1, h2, img {
+      margin-top: 30px;
+    }
 
+    h2 {
+      margin-top: 50px;
+    }
 
-<h2>Bookings</h2>
+    .car-image {
+      margin-bottom: 500px;
+    }
+  </style>
 
-<% if @car.bookings.any? %>
-  <table>
-    <thead>
-      <tr>
-        <th>User</th>
-        <th>Date from</th>
-        <th>Date to</th>
-      </tr>
-    </thead>
+</head>
+<body>
+
+<div class="container mt-4">
+  <h1><%= @car.name %></h1>
+  <table class="table">
     <tbody>
-      <% @car.bookings.each do |booking| %>
-        <tr>
-          <td><%= booking.user.email %></td>
-          <td><%= booking.date_from %></td>
-          <td><%= booking.date_to %></td>
-        </tr>
-      <% end %>
+      <tr>
+        <td>Fuel:</td>
+        <td><%= @car.fuel %></td>
+      </tr>
+      <tr>
+        <td>Make:</td>
+        <td><%= @car.make %></td>
+      </tr>
+      <tr>
+        <td>Seats:</td>
+        <td><%= @car.seats %></td>
+      </tr>
     </tbody>
   </table>
-<% else %>
-  <p>No bookings found.</p>
-<% end %>
+  <% if @car.image_url.present? %>
+    <%= image_tag(@car.image_url, :crop => :fill, :width => 400, :height => 300, :gravity => :center) %>
+  <% end %>
 
-<h2>Feedbacks</h2>
-
-<% if @car.feedbacks.any? %>
-  <table>
-    <thead>
-      <tr>
-        <th>User</th>
-        <th>Rating</th>
-        <th>Content</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @car.feedbacks.each do |feedback| %>
-        <tr>
-          <td><%= feedback.user.email %></td>
-          <td><%= feedback.rating %></td>
-          <td><%= feedback.content %></td>
-        </tr>
+  <!-- Link to create new booking -->
+  <% if user_signed_in? %>
+    <div class="d-flex">
+      <%= link_to 'Book Now', new_car_booking_path(@car), class: "btn btn-primary mr-3" %>
+      <% if current_user == @car.user %>
+        <%= link_to 'Edit', edit_car_path(@car), class: "btn btn-primary mr-3" %>
+        <%= form_with url: car_path(@car), method: :delete, local: true do %>
+          <%= button_tag 'Delete', type: 'submit', class: 'btn btn-primary', data: { confirm: 'Are you sure?' } %>
+        <% end %>
       <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>No feedbacks found.</p>
-<% end %>
+    </div>
+  <% end %>
 
+  <% if @car.bookings.any? %>
+    <h2>Bookings</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Date from</th>
+          <th>Date to</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @car.bookings.each do |booking| %>
+          <tr>
+            <td><%= booking.user.email %></td>
+            <td><%= booking.date_from %></td>
+            <td><%= booking.date_to %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No bookings found.</p>
+  <% end %>
 
-<%= link_to 'Back', cars_path %>
+  <% if @car.feedbacks.any? %>
+    <h2>Feedbacks</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Rating</th>
+          <th>Content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @car.feedbacks.each do |feedback| %>
+          <tr>
+            <td><%= feedback.user.email %></td>
+            <td><%= feedback.rating %></td>
+            <td><%= feedback.content %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No feedbacks found.</p>
+  <% end %>
 
-
-
-
-<p>Find me in app/views/cars/show.html.erb</p>
+  <%= link_to 'Back', cars_path %>
+</div>
