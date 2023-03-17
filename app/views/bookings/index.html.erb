@@ -11,9 +11,9 @@
           <p class="card-text"><strong>Booking dates:</strong> <%= booking.date_from.strftime("%B %d, %Y") %> - <%= booking.date_to.strftime("%B %d, %Y") %></p>
           <% if booking.status == "accepted" %>
             <% if current_user.feedbacks.find_by(booking_id: booking.id) %>
-              <%= link_to 'Feedback left', '#' %>
+              <%= link_to 'Feedback left', '#', class: 'btn btn-light'%>
             <% else %>
-              <%= link_to 'Leave Feedback', new_booking_feedback_path(booking) %>
+              <%= link_to 'Leave Feedback', new_booking_feedback_path(booking), class: 'btn btn-primary'%>
             <% end %>
           <% end %>
         </div>

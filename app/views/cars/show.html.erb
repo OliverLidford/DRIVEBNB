@@ -4,9 +4,6 @@
   <title>Cars#show</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
   <style>
     .card {
       width: 100%;
@@ -61,11 +58,12 @@
   <!-- Link to create new booking -->
   <% if user_signed_in? %>
     <div class="d-flex">
+      <br>
       <%= link_to 'Book Now', new_car_booking_path(@car), class: "btn btn-primary mr-3" %>
       <% if current_user == @car.user %>
-        <%= link_to 'Edit', edit_car_path(@car), class: "btn btn-primary mr-3" %>
+        <%= link_to 'Edit', edit_car_path(@car), class: "btn btn-secondary mr-3" %>
         <%= form_with url: car_path(@car), method: :delete, local: true do %>
-          <%= button_tag 'Delete', type: 'submit', class: 'btn btn-primary', data: { confirm: 'Are you sure?' } %>
+          <%= button_tag 'Delete', type: 'submit', class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
         <% end %>
       <% end %>
     </div>
@@ -119,5 +117,5 @@
     <p>No feedbacks found.</p>
   <% end %>
 
-  <%= link_to 'Back', cars_path %>
+  <%= link_to 'Back', cars_path, class: 'btn btn-outline-primary' %>
 </div>
