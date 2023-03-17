@@ -2,4 +2,4 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import "bootstrap"
-import "cloudinary/jquery.cloudinary"
+// import "cloudinary/jquery.cloudinary"
