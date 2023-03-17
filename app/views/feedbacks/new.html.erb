@@ -1,5 +1,6 @@
 
-<h1>Leave Feedback:</h1>
+<h1 style="color: #f73c2c;">Leave Feedback</h1>
+
 
 <%= simple_form_for [@booking, @feedback] do |f| %>
   <%= f.input :rating, label: "Rating", collection: 1..5, prompt: "Select a rating" %>
