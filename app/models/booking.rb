@@ -10,6 +10,9 @@ class Booking < ApplicationRecord
 
   private
 
+
+
+
   def set_default_status
     self.status ||= "pending"
   end
